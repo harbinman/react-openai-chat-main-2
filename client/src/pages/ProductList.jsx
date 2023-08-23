@@ -3,6 +3,8 @@ import { Box, Grid } from "@mui/material";
 import ProductCard from "../components/ProductCard";
 import { buy } from "../api/buy.api";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 const products = [
   {
     title: "1级会员",
@@ -14,13 +16,18 @@ const products = [
 ];
 
 const ProductList = () => {
+  const navigate = useNavigate();
   const handleBuy = async (product) => {
     // 在这里执行购买商品的操作，可以根据 product 数据执行相关逻辑
     console.log("价格:", product.price);
     const { response, err } = await buy(product);
     if (response) {
+      console.log(JSON.stringify(response.message));
+      alert(JSON.stringify(response.message));
       localStorage.setItem("class", response.class);
-      navigate("/");
+      if (response.success) {
+        navigate("/");
+      }
     }
 
     if (err) toast.error(err.message);

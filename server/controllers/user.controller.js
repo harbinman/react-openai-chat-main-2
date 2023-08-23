@@ -56,3 +56,50 @@ export const userSignIn = async (req, res) => {
     });
   } catch (err) {}
 };
+export const userBuy = async (req, res) => {
+  const { price, title, userName } = req.body;
+  console.log(req.body);
+  console.log(price, title[0], userName);
+  const classLevel = title[0];
+  try {
+    //易支付接口相关代码块
+    if (true) {
+      console.log("会员等级数据库操作");
+      const result = await setClassLevel(userName, classLevel);
+      console.log("result:", result);
+      if (!result) {
+        res.status(404).json({ message: "User not found" });
+      } else {
+        res
+          .status(200)
+          .json({ message: "充值成功！", class: result.class, success: true });
+      }
+    } else {
+      throw Error({ message: "充值失败，请重新再试。" });
+    }
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+};
+
+export const setClassLevel = async (userName, classLevel) => {
+  let updateFields = { class: classLevel };
+  console.log(classLevel);
+
+  const currentDate = new Date();
+  const newexpirationDate = new Date(currentDate);
+  if (classLevel == 1) {
+    newexpirationDate.setDate(currentDate.getDate() + 30); // 增加 30 天
+    console.log("newexpirationDate", newexpirationDate);
+  }
+  updateFields.expirationDate = newexpirationDate;
+
+  const updatedUser = await User.findOneAndUpdate(
+    { username: userName },
+    updateFields,
+    { new: true } // 返回更新后的记录，并指定返回的字段
+  );
+  return updatedUser;
+};

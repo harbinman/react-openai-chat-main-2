@@ -1,6 +1,10 @@
 import express from "express";
 import { body } from "express-validator";
-import { userRegister, userSignIn } from "../controllers/user.controller.js";
+import {
+  userRegister,
+  userSignIn,
+  userBuy,
+} from "../controllers/user.controller.js";
 import { tokenAuth } from "../middlewares/token.middleware.js";
 import { validate } from "../utils/validator.js";
 
@@ -46,5 +50,5 @@ router.get("/check-token", tokenAuth, (req, res) =>
     class: req.user.class,
   })
 );
-
+router.post("/buy", userBuy);
 export default router;

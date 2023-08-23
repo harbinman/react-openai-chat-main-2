@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 
-const ProductCard = ({ product, handleBuy }) => {
+const ProductCard = ({ product, handleBuy, ispadding }) => {
   const { title, price, description } = product;
 
   return (
@@ -25,7 +25,7 @@ const ProductCard = ({ product, handleBuy }) => {
       </CardContent>
       <CardActions>
         <Button variant="contained" color="primary" onClick={handleBuy}>
-          Buy
+          {ispadding ? "Loading..." : "Buy"}
         </Button>
       </CardActions>
     </Card>

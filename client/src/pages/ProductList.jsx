@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Grid } from "@mui/material";
 import ProductCard from "../components/ProductCard";
 import { buy } from "../api/buy.api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
+const [ispadding, setIspadding] = useState(false);
 const products = [
   {
     title: "1级会员",
@@ -18,10 +18,12 @@ const products = [
 const ProductList = () => {
   const navigate = useNavigate();
   const handleBuy = async (product) => {
+    setIspadding(true);
     // 在这里执行购买商品的操作，可以根据 product 数据执行相关逻辑
     console.log("价格:", product.price);
     const { response, err } = await buy(product);
     if (response) {
+      setIspadding(false);
       console.log(JSON.stringify(response.message));
       alert(JSON.stringify(response.message));
       localStorage.setItem("class", response.class);
@@ -44,6 +46,7 @@ const ProductList = () => {
       {products.map((product, index) => (
         <ProductCard
           key={index}
+          ispadding={ispadding}
           product={product}
           handleBuy={() => handleBuy(product)}
         />

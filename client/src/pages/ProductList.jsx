@@ -4,7 +4,7 @@ import ProductCard from "../components/ProductCard";
 import { buy } from "../api/buy.api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-const [ispadding, setIspadding] = useState(false);
+
 const products = [
   {
     title: "1级会员",
@@ -16,6 +16,7 @@ const products = [
 ];
 
 const ProductList = () => {
+  const [ispadding, setIspadding] = useState(false);
   const navigate = useNavigate();
   const handleBuy = async (product) => {
     setIspadding(true);

@@ -64,7 +64,6 @@ export const userBuy = async (req, res) => {
   try {
     //易支付接口相关代码块
     if (true) {
-      console.log("会员等级数据库操作");
       const result = await setClassLevel(userName, classLevel);
       console.log("result:", result);
       if (!result) {
@@ -75,7 +74,7 @@ export const userBuy = async (req, res) => {
           .json({ message: "充值成功！", class: result.class, success: true });
       }
     } else {
-      throw Error({ message: "充值失败，请重新再试。" });
+      throw Error("充值失败，请重新再试。");
     }
   } catch (err) {
     res.status(500).json({

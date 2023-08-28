@@ -62,19 +62,14 @@ export const userBuy = async (req, res) => {
   console.log(price, title[0], userName);
   const classLevel = title[0];
   try {
-    //易支付接口相关代码块
-    if (true) {
-      const result = await setClassLevel(userName, classLevel);
-      console.log("result:", result);
-      if (!result) {
-        res.status(404).json({ message: "User not found" });
-      } else {
-        res
-          .status(200)
-          .json({ message: "充值成功！", class: result.class, success: true });
-      }
+    const result = await setClassLevel(userName, classLevel);
+    console.log("result:", result);
+    if (!result) {
+      res.status(404).json({ message: "User not found" });
     } else {
-      throw Error("充值失败，请重新再试。");
+      res
+        .status(200)
+        .json({ message: "充值成功！", class: result.class, success: true });
     }
   } catch (err) {
     res.status(500).json({

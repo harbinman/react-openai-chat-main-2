@@ -48,7 +48,6 @@ const ProductList = () => {
 
     // 检查 trade_status 参数
     if (trade_status === "TRADE_SUCCESS") {
-      console.log("********************");
       // 在这里执行购买商品的操作，可以根据 product 数据执行相关逻辑
       fetchData();
     }

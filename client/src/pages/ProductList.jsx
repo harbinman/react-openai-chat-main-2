@@ -32,10 +32,11 @@ const ProductList = () => {
         console.log("response is ", response);
         if (response) {
           console.log(JSON.stringify(response.message));
-          alert(JSON.stringify(response.message));
+          toast(response.message);
+
           localStorage.setItem("class", response.class);
           if (response.success) {
-            // navigate("/");
+            navigate("/");
           }
         }
         if (err) toast.error(err.message);

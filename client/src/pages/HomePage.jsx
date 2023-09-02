@@ -28,7 +28,7 @@ const HomePage = () => {
 
   const navigate = useNavigate();
   const inputRef = useRef();
-  const chatWrapperRef = useRef();
+  const chatWrapperRef = useRef(null);
 
   const [onRequest, setOnRequest] = useState(false);
   const [question, setQuestion] = useState("");

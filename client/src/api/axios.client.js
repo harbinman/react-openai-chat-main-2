@@ -1,8 +1,7 @@
 import axios from "axios";
 import queryString from "query-string";
-// import env from "dotenv";
 
-const baseURL = "http://127.0.0.1:5000/api/v1/";
+const baseURL = import.meta.env.VITE_SERVER_URL;
 
 const axiosClient = axios.create({
   baseURL,

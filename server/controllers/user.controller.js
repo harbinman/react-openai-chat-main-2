@@ -62,6 +62,9 @@ export const userBuy = async (req, res) => {
   console.log(price, title[0], userName);
   const classLevel = title[0];
   try {
+    // if (!Number.isInteger(classLevel)) {
+    //   res.status(404).json({ message: "商品名称错误！" });
+    // }
     const result = await setClassLevel(userName, classLevel);
     console.log("result:", result);
     if (!result) {
